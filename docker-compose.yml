@@ -1,0 +1,6 @@
+app:
+  build: .
+  working_dir: /usr/src/app
+  env_file: .env
+  volumes:
+    - .:/usr/src/app
