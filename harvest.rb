@@ -1,7 +1,8 @@
 require 'twitter'
 
+require_relative 'lib/util'
+
 TWEET_COUNT = 20
-STATUS_URL_RE = /^https?:\/\/twitter\.com\/.+\/status\/([0-9]+)$/
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
@@ -10,13 +11,9 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
 end
 
-def quoted_tweet_url?(url)
-  (url.to_s =~ STATUS_URL_RE) != nil
-end
-
 def harvest_tweet(client, tweet)
   tweet.uris.each do |uri|
-    if not quoted_tweet_url?(uri.expanded_url)
+    if not Util.quoted_tweet_url?(uri.expanded_url)
       print "#{uri.expanded_url}\n"
     end
   end
