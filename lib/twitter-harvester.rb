@@ -4,17 +4,17 @@ class TwitterHarvester < Twitter::REST::Client
   require_relative './util'
 
   def harvest_tweet(tweet)
-    tweet.uris.each do |uri|
-      yield uri unless Util.quoted_tweet_url?(uri.expanded_url)
+    uris = tweet.uris.select do |uri|
+      !Util.quoted_tweet_url? uri.expanded_url
     end
     if tweet.quoted_status?
-      harvest_tweet(tweet.quoted_status) {|uri| yield uri}
+      uris.concat harvest_tweet(tweet.quoted_status)
     end
+    return uris
   end
 
   def harvest_home_timeline(count)
-    home_timeline({count: count}).each do |tweet|
-      harvest_tweet(tweet) {|uri| yield uri}
-    end
+    home_timeline({count: count}).map {|tweet| harvest_tweet(tweet)}
+      .flatten
   end
 end
