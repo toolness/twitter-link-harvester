@@ -1,8 +1,8 @@
 require 'twitter'
 
-require_relative './util'
-
 class TwitterHarvester < Twitter::REST::Client
+  require_relative './util'
+
   def harvest_tweet(tweet)
     tweet.uris.each do |uri|
       if not Util.quoted_tweet_url?(uri.expanded_url)
