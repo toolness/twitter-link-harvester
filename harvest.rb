@@ -7,4 +7,6 @@ harvester = TwitterHarvester.new do |config|
   config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
 end
 
-harvester.harvest_home_timeline 20
+harvester.harvest_home_timeline(20) do |uri|
+  print "#{uri.expanded_url}\n"
+end
