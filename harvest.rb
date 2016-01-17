@@ -10,14 +10,18 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
 end
 
+def quoted_tweet_url?(url)
+  (url.to_s =~ STATUS_URL_RE) != nil
+end
+
 def harvest_tweet(client, tweet)
   tweet.uris.each do |uri|
-    print "#{uri.expanded_url}\n"
-    match = STATUS_URL_RE.match(uri.expanded_url)
-    if match
-      print "Following #{match[1]}\n"
-      harvest_tweet(client, client.status(match[1].to_i))
+    if not quoted_tweet_url?(uri.expanded_url)
+      print "#{uri.expanded_url}\n"
     end
+  end
+  if tweet.quoted_status?
+    harvest_tweet(client, tweet.quoted_status)
   end
 end
 
