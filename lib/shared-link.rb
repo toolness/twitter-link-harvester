@@ -1,12 +1,17 @@
 class SharedLink
+  require 'addressable/uri'
   require 'nokogiri'
   require 'httpclient'
 
-  attr_reader :title, :desc, :uri
+  attr_reader :title, :description, :uri
 
   MAX_REDIRECTS = 10
 
   def initialize(uri)
+    if not uri.is_a? Addressable::URI
+      uri = Addressable::URI.parse(uri)
+    end
+
     client = HTTPClient.new
     res = client.get(uri)
     redirect_count = 0
@@ -15,14 +20,15 @@ class SharedLink
       new_uri = client.default_redirect_uri_callback(uri, res)
       uri = new_uri
       res = client.get(uri)
+      redirect_count += 1
     end
 
     html_doc = Nokogiri::HTML(res.body)
     title = html_doc.at_css('title')
-    desc = html_doc.at_css('meta[name=description]')
+    description = html_doc.at_css('meta[name=description]')
 
     @uri = uri
     @title = title ? title.content : nil
-    @desc = desc ? desc['content'] : nil
+    @description = description ? description['content'] : nil
   end
 end
