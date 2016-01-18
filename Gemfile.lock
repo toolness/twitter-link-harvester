@@ -30,6 +30,7 @@ GEM
     naught (1.1.0)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
+    redcarpet (3.3.4)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -71,6 +72,7 @@ PLATFORMS
 DEPENDENCIES
   httpclient (= 2.7.1)
   nokogiri (= 1.6.7.1)
+  redcarpet (= 3.3.4)
   rspec
   twitter (= 5.15.0)
   webmock
