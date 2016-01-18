@@ -29,4 +29,4 @@ whenever the `Gemfile` changes, you will need to re-run
 `docker-compose build`.
 
 [bundler]: http://bundler.io/
-[Docker Compose]: https://docs.docker.com/compose/
+[Docker Compose]: https://docs.docker.com/compose/install/
