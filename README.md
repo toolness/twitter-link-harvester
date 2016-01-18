@@ -6,8 +6,8 @@ and sends you an email containing them.
 You will need [bundler][] and Ruby 2.3.
 
 ```
-bundler install
-rspec -fd
+$ bundler install
+$ rspec -fd
 ```
 
 Um, that's all there is right now.
@@ -19,6 +19,7 @@ version managers and all that stuff, you can develop (and run) the
 app in a Docker container. Just get [Docker Compose][] and run:
 
 ```terminal
+$ touch .env
 $ docker-compose build
 $ docker-compose run app bash
 ```
