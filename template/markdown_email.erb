@@ -1,0 +1,25 @@
+<% if @links.length == 0 %>
+No links were able to be harvested from your Twitter feed.
+<% else %>
+<% if @links.length == 1 %>
+One link was harvested from your Twitter feed.
+<% else %>
+Here are <%= @links.length %> harvested links from your Twitter feed.
+<% end %>
+
+<% @links.each_with_index do |link, i| %>
+  * [<%= link.title || 'Untitled' %>][<%= i + 1 %>] (<%= link.uri.host %>)
+<% if link.description %>
+
+    <%= link.description %>
+
+
+<% end %>
+<% end %>
+
+<% @links.each_with_index do |link, i| %>
+[<%= i + 1 %>]: <%= link.uri %>
+
+<% end %>
+
+<% end %>

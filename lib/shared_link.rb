@@ -31,4 +31,15 @@ class SharedLink
     @title = title ? title.content : nil
     @description = description ? description['content'] : nil
   end
+
+  # This fake class can be used for testing.
+  class Fake
+    attr_reader :title, :description, :uri
+
+    def initialize(uri:, title: nil, description: nil)
+      @uri = Addressable::URI.parse(uri.to_s)
+      @title = title
+      @description = description
+    end
+  end
 end
