@@ -4,10 +4,9 @@ class Twitter::Tweet
   require_relative './util'
 
   def harvest
-    links = uris.select do |uri|
-      !Util.quoted_tweet_url? uri.expanded_url
+    links = uris.map {|entity| entity.expanded_url}.select do |uri|
+      !Util.quoted_tweet_url? uri
     end
-    links = links.map {|entity| entity.expanded_url}
     quoted_status? ? links.concat(quoted_status.harvest) : links
   end
 end
