@@ -16,6 +16,9 @@ class SharedLink
     res = client.get(uri)
     redirect_count = 0
 
+    # Note that httpclient does have the ability to follow redirects, but
+    # it doesn't seem to have the ability to tell us the URL of the final
+    # endpoint, which is something we want. So we'll do this ourselves.
     while res.redirect? and redirect_count < MAX_REDIRECTS
       new_uri = client.default_redirect_uri_callback(uri, res)
       uri = new_uri
