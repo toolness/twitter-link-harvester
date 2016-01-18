@@ -1,4 +1,4 @@
-require_relative 'lib/twitter-harvester'
+require_relative 'lib/twitter_harvester'
 
 harvester = TwitterHarvester.new do |config|
   config.consumer_key = ENV['TWITTER_CONSUMER_KEY']

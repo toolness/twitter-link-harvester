@@ -1,4 +1,4 @@
-require 'shared-link'
+require 'shared_link'
 
 describe SharedLink do
   describe '#new' do
