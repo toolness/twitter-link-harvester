@@ -12,7 +12,7 @@ API_HEADERS = {
 }
 
 class FakeTweet
-  def initialize(id, urls, quoted_tweet = nil)
+  def initialize(id:, urls: [], quoted_tweet: nil)
     @id = id
     @urls = urls
     @quoted_tweet = quoted_tweet
@@ -53,8 +53,8 @@ describe TwitterHarvester do
   describe '#harvest_home_timeline' do
     it 'ignores tweets without URLs' do
       stub_home_timeline([
-        FakeTweet.new(1, []),
-        FakeTweet.new(2, ['http://bop'])
+        FakeTweet.new(id: 1),
+        FakeTweet.new(id: 2, urls: ['http://bop'])
       ])
 
       expect(harvester().harvest_home_timeline(10).map {|uri| uri.to_s})
@@ -63,8 +63,8 @@ describe TwitterHarvester do
 
     it 'ignores quoted tweet URLs' do
       stub_home_timeline([
-        FakeTweet.new(1, ['https://twitter.com/foo/status/1']),
-        FakeTweet.new(2, ['http://bop'])
+        FakeTweet.new(id: 1, urls: ['https://twitter.com/foo/status/1']),
+        FakeTweet.new(id: 2, urls: ['http://bop'])
       ])
 
       expect(harvester().harvest_home_timeline(10).map {|uri| uri.to_s})
@@ -73,8 +73,11 @@ describe TwitterHarvester do
 
     it 'includes URLs in quoted tweets' do
       stub_home_timeline([
-        FakeTweet.new(1, [], FakeTweet.new(3, ['http://blah'])),
-        FakeTweet.new(2, ['http://bop'])
+        FakeTweet.new(
+          id: 1,
+          quoted_tweet: FakeTweet.new(id: 3, urls: ['http://blah'])
+        ),
+        FakeTweet.new(id: 2, urls: ['http://bop'])
       ])
 
       expect(harvester().harvest_home_timeline(10).map {|uri| uri.to_s})
