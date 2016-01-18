@@ -7,6 +7,7 @@ class Twitter::Tweet
     links = uris.select do |uri|
       !Util.quoted_tweet_url? uri.expanded_url
     end
+    links = links.map {|entity| entity.expanded_url}
     quoted_status? ? links.concat(quoted_status.harvest) : links
   end
 end

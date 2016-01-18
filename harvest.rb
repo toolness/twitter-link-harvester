@@ -8,5 +8,5 @@ harvester = TwitterHarvester.new do |config|
 end
 
 harvester.harvest_home_timeline(20).each do |uri|
-  print "#{uri.expanded_url}\n"
+  print "#{uri}\n"
 end
