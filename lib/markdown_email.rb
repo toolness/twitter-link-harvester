@@ -7,8 +7,10 @@ class MarkdownEmail
   end
 
   def render_to_markdown
+    template = File.read('template/markdown_email.erb', :encoding => 'UTF-8')
+
     # Configure ERB for suppressing newlines ending in %>.
-    renderer = ERB.new(File.read('template/markdown_email.erb'), 0, '>')
+    renderer = ERB.new(template, 0, '>')
     renderer.result(binding)
   end
 

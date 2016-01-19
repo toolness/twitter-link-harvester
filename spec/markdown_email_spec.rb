@@ -18,5 +18,10 @@ describe MarkdownEmail do
         SharedLink::Fake.new(uri: 'http://example.org')
       ]).render_to_html
     end
+
+    it 'should use UTF-8' do
+      html = MarkdownEmail.new([]).render_to_html
+      expect(html.encoding.name).to eql('UTF-8')
+    end
   end
 end
