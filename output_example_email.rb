@@ -34,7 +34,7 @@ module OutputExampleEmail
     end
 
     if send_email
-      Env.configure_pony().mail(
+      Env.new.configure_pony.mail(
         :body => email.render_to_markdown,
         :html_body => email.render_to_html,
         :subject => 'Example Email'

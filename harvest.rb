@@ -7,7 +7,8 @@ require_relative 'env'
 
 module Harvest
   def self.run!(count: 20, silent: false)
-    harvester = Env.create_harvester()
+    env = Env.new
+    harvester = env.create_harvester
 
     print "Fetching #{count} timeline entries...\n" unless silent
 
@@ -22,7 +23,7 @@ module Harvest
 
     email = MarkdownEmail.new links
 
-    Env.configure_pony().mail(
+    env.configure_pony.mail(
       :body => email.render_to_markdown,
       :html_body => email.render_to_html,
       :subject => 'Harvested Twitter Links'
