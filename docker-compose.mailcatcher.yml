@@ -1,6 +1,9 @@
 app:
   links:
     - mailcatcher
+  environment:
+    SMTP_HOSTNAME: "mailcatcher"
+    SMTP_PORT: "1025"
 
 mailcatcher:
   build: ./mailcatcher
