@@ -48,6 +48,14 @@ describe SharedLink do
       expect(link.title).to eql('hi there')
     end
 
+    it 'works with pages that have an empty <title>' do
+      stub_request(:get, 'example.com')
+        .to_return(:body => "<title></title>")
+
+      link = SharedLink.new('http://example.com/')
+      expect(link.title).to be_nil
+    end
+
     it 'works with pages that have a <meta name="description">' do
       stub_request(:get, 'example.com')
         .to_return(:body => '<meta name="description" content="blah">')

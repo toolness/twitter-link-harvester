@@ -3,6 +3,8 @@ class SharedLink
   require 'nokogiri'
   require 'httpclient'
 
+  require_relative './util'
+
   attr_reader :title, :description, :uri
 
   MAX_REDIRECTS = 10
@@ -31,8 +33,8 @@ class SharedLink
     description = html_doc.at_css('meta[name=description]')
 
     @uri = uri
-    @title = title ? title.content.strip.split.join(' ') : nil
-    @description = description ? description['content'] : nil
+    @title = title ? Util.squish(title.content) : nil
+    @description = description ? Util.squish(description['content']) : nil
   end
 
   # This fake class can be used for testing.

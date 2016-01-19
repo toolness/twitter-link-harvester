@@ -2,6 +2,20 @@ require 'util'
 require 'addressable/uri'
 
 describe Util do
+  describe '#squish' do
+    it 'returns nil when given nil' do
+      expect(Util.squish nil).to be_nil
+    end
+
+    it 'returns nil instead of empty string' do
+      expect(Util.squish '').to be_nil
+    end
+
+    it 'squishes whitespace' do
+      expect(Util.squish " hi\nthere").to eql('hi there')
+    end
+  end
+
   describe '#quoted_tweet_url?' do
     it 'rejects non-URLs' do
       expect(Util.quoted_tweet_url? 'blah').to eql(false)
