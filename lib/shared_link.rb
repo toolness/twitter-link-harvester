@@ -31,7 +31,7 @@ class SharedLink
     description = html_doc.at_css('meta[name=description]')
 
     @uri = uri
-    @title = title ? title.content : nil
+    @title = title ? title.content.strip.split.join(' ') : nil
     @description = description ? description['content'] : nil
   end
 

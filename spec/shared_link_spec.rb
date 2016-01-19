@@ -42,10 +42,10 @@ describe SharedLink do
 
     it 'works with pages that have a <title>' do
       stub_request(:get, 'example.com')
-        .to_return(:body => '<title>hi</title>')
+        .to_return(:body => "<title>  hi\nthere\n</title>")
 
       link = SharedLink.new('http://example.com/')
-      expect(link.title).to eql('hi')
+      expect(link.title).to eql('hi there')
     end
 
     it 'works with pages that have a <meta name="description">' do
