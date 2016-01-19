@@ -22,7 +22,7 @@ module Env
         :port => env['SMTP_PORT'],
         :user_name => env['SMTP_USERNAME'],
         :password => env['SMTP_PASSWORD'],
-        :enable_starttls_auto => ENV['SMTP_ENABLE_STARTTLS_AUTO'].nil?,
+        :enable_starttls_auto => !ENV['SMTP_ENABLE_STARTTLS_AUTO'].nil?,
         :authentication => ENV['SMTP_AUTHENTICATION'] &&
                            ENV['SMTP_AUTHENTICATION'].to_sym
       }
