@@ -2,6 +2,7 @@ class SharedLink
   require 'addressable/uri'
   require 'nokogiri'
   require 'httpclient'
+  require 'httpclient/util'
 
   require_relative './util'
 
@@ -22,7 +23,8 @@ class SharedLink
     # it doesn't seem to have the ability to tell us the URL of the final
     # endpoint, which is something we want. So we'll do this ourselves.
     while res.redirect? and redirect_count < MAX_REDIRECTS
-      new_uri = client.default_redirect_uri_callback(uri, res)
+      new_uri = HTTPClient::Util::urify(res.header['location'][0])
+      new_uri = uri + new_uri if new_uri.relative?
       uri = new_uri
       res = client.get(uri)
       redirect_count += 1
