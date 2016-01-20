@@ -1,7 +1,7 @@
 class Env
   require 'pony'
 
-  require_relative 'lib/twitter_harvester'
+  require_relative './twitter_harvester'
 
   def initialize(env = ENV)
     @env = env

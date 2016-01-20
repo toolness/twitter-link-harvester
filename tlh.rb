@@ -3,7 +3,7 @@ require 'thor'
 require_relative 'lib/twitter_harvester'
 require_relative 'lib/shared_link'
 require_relative 'lib/markdown_email'
-require_relative 'env'
+require_relative 'lib/env'
 
 class TwitterLinkHarvester < Thor
   class_option :silent, :type => :boolean, :desc => "Run silently"
