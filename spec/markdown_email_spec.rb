@@ -1,11 +1,11 @@
 require 'markdown_email'
 require 'shared_link'
 
-require_relative '../output_example_email'
+require_relative '../tlh'
 
 describe MarkdownEmail do
   it 'should pass smoke test' do
-    OutputExampleEmail.run! silent: true
+    TwitterLinkHarvester.new.invoke(:example_email, [], silent: true)
   end
 
   describe '#render_to_html' do

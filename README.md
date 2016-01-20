@@ -16,12 +16,12 @@ At this point you will need to set up a bunch of environment variables. See
 `.env.sample` for details on them. Once they're defined, run:
 
 ```terminal
-$ ruby harvest.rb
+$ ruby tlh.rb harvest
 ```
 
 This will harvest links and send an email containing them.
 
-Run `ruby harvest.rb --help` for more options.
+Run `ruby tlh.rb` for more options.
 
 ## Docker Quick Start
 
@@ -83,10 +83,8 @@ You can edit the Markdown template in `template/markdown_email.erb`. You can
 render the template with some sample data by running:
 
 ```terminal
-$ ruby output_example_email.rb
+$ ruby tlh.rb example_email
 ```
-
-Run `ruby output_example_email.rb --help` for more options.
 
 [Heroku Scheduler]: https://devcenter.heroku.com/articles/scheduler
 [bundler]: http://bundler.io/
