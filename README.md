@@ -10,10 +10,10 @@ You will need [bundler][] and Ruby 2.3.
 ```terminal
 $ bundler install
 $ rspec -fd
+$ cp .env.sample .env
 ```
 
-At this point you will need to set up a bunch of environment variables. See
-`.env.sample` for details on them. Once they're defined, run:
+Now edit `.env` as needed and run:
 
 ```terminal
 $ ruby tlh.rb harvest
@@ -27,13 +27,7 @@ Run `ruby tlh.rb` for more options.
 
 If you don't want to deal with installing Ruby and/or installing Ruby
 version managers and all that stuff, you can develop (and run) the
-app in a Docker container. First, run:
-
-```terminal
-$ cp .env.sample .env
-```
-
-Now edit `.env` as needed, then get [Docker Compose][] and run:
+app in a Docker container. Install [Docker Compose][] and run:
 
 ```terminal
 $ docker-compose build
@@ -47,6 +41,9 @@ the right Ruby version, or anything like that.
 
 Note, however, that whenever the `Gemfile` changes, you will need to re-run
 `docker-compose build`.
+
+Also, if you change your `.env` file, you will need to exit your container
+and re-run `docker-compose run app bash`.
 
 ### Easy Email Testing
 

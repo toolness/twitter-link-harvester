@@ -1,9 +1,15 @@
 class Env
   require 'pony'
+  require 'dotenv'
 
   require_relative './twitter_harvester'
 
-  def initialize(env = ENV)
+  def initialize(env = ENV, use_dotenv: true)
+    if env.equal?(ENV) && env['TWITTER_CONSUMER_KEY'].nil? && use_dotenv
+      puts "Configuration not found in environment, attempting " +
+           "to load .env file."
+      Dotenv.load
+    end
     @env = env
   end
 
