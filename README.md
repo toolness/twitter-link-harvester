@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/toolness/twitter-link-harvester.svg?branch=master)](https://travis-ci.org/toolness/twitter-link-harvester)
+
 This is a simple program that searches your home timeline for links
 and sends you an email containing them.
 
